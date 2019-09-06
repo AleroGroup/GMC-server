@@ -1,0 +1,19 @@
+(Don't forget to remove comments)
+---
+apps:
+- name: gmcclient # process name. You will use it to make commands such as pm2 restart client
+  script: node_modules/nuxt-start/bin/nuxt-start.js  # path to nuxt-start renderer from root nuxt dir. Don't forget to install nuxt-start dependency
+  cwd: /root/app/client	# absolute path to nuxt dir
+  max_memory_restart: "250M" 	# in case nuxt renderer eats all memory, it will be restarted
+  args: "start"	# command to skip build and start renderer
+  env_production:
+    PORT: 3000		# local port. Same port should be set in nginx config
+    NODE_ENV: production	# in case of enviroment variables usage
+
+# API server, if you have one
+- name: server
+  script: server.js
+  cwd: /root/app/server
+  env_production:
+    PORT: 3001
+    NODE_ENV: production
