@@ -14,7 +14,6 @@
     "aws-sdk": "^2.521.0",
     "babel-preset-env": "^1.7.0",
     "bluebird": "^3.5.5",
-    "bulma": "^0.7.5",
     "cloudinary": "^1.14.0",
     "connect-multiparty": "^2.2.0",
     "consola": "^2.10.1",

@@ -120,6 +120,12 @@ app.post("/sendmail", multipartMiddleware, function (req, res) {
   })
 })
 
+/** Rendering HTML **/
+const router = express.Router();
+
+router.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'))
+})
 
 
  async function start() {
@@ -134,6 +140,9 @@ app.post("/sendmail", multipartMiddleware, function (req, res) {
   app.use(express.static(path.join(__dirname, 'public')))
   app.use('/uploads', express.static('uploads'));
 
+  //Resndering HTML pages
+  app.use('/', router)
+  
   //app.use('/uploads', express.static('uploads'));
   app.use('/company', companyRouter)
   app.use('/wildcard', wildcardRouter)
