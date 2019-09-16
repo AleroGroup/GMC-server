@@ -115,3 +115,13 @@ app.post("/sendmail", multipartMiddleware, function (req, res) {
         }
     })
 })
+
+/** Rendering HTML **/
+const router = express.Router();
+
+router.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'))
+})
+
+  //Resndering HTML pages
+  app.use('/', router)
