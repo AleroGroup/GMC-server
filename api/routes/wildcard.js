@@ -8,8 +8,8 @@ router.post('/postwildcard', upload.any(), wildcardController.createApp)
 
 
 //GET the form by id
-router.get('/:wildcardId', (req, res, next) => {
-  const id = req.params.wildcardId;
+router.get('/view/:id', (req, res, next) => {
+  const id = req.params.id;
   wildcardModel.findById(id)
     .exec()
     .then(doc => {
@@ -37,6 +37,18 @@ router.get('/', (req, res, next) => {
     });
   });
 });
+
+// Delete a form post
+router.route('/delete/:id').delete(function (req, res) {
+  wildcardModel.findByIdAndRemove({
+    _id: req.params.id
+  }, function (err) {
+    if (err) res.json(err);
+    else res.json('Successfully removed');
+  });
+});
+
+
 module.exports = router
 
 

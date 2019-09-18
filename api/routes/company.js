@@ -10,8 +10,8 @@ router.post('/postcompany', upload.any(), companyController.createApp)
 
 
 //GET the form by id
-router.get('/:companyId', (req, res, next) => {
-  const id = req.params.companyId;
+router.get('/view/:id', (req, res, next) => {
+  const id = req.params.id;
   companyModel.findById(id)
     .exec()
     .then(doc => {
@@ -40,46 +40,13 @@ router.get('/', (req, res, next) => {
   });
 });
 
-// @route GET /files/:filename
-// @desc  Display single file object
-router.get('/files/:filename', (req, res) => {
-  gfs.files.findOne({
-    filename: req.params.filename
-  }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      });
-    }
-    // File exists
-    return res.json(file);
-  });
-});
-
-// @route GET /image/:filename
-// @desc Display Image
-router.get('/image/:filename', (req, res) => {
-  gfs.files.findOne({
-    filename: req.params.filename
-  }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      });
-    }
-
-    // Check if image
-    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: 'Not an image'
-      });
-    }
+// Delete by id a form post
+router.route('/delete/:id').delete(function (req, res) {
+  companyModel.findByIdAndRemove({
+    _id: req.params.id
+  }, function (err) {
+    if (err) res.json(err);
+    else res.json('Successfully removed');
   });
 });
 
