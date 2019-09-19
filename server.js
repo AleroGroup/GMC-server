@@ -37,6 +37,10 @@ const companyRouter = require('./api/routes/company')
 const wildcardRouter = require('./api/routes/wildcard')
 const userRouter = require('./api/routes/user')
 const fileRouter = require('./api/routes/files')
+
+//Rendering the webpages
+const main = require('./index')
+
 /************************************************/
 
 // SENDING EMAIL OF A USER THAT IS REGISTERED
@@ -140,6 +144,7 @@ app.post("/sendmail", multipartMiddleware, function (req, res) {
   app.use('/wildcard', wildcardRouter)
   app.use('/user', userRouter)
   app.use('/files', fileRouter)
+  app.use('/', main)
 
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')

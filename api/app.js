@@ -4,7 +4,6 @@ const app = express()
 // IMOPRTING ESSENTIAL LIBRARIES
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const path = require('path')
 const nodemailer = require('nodemailer')
 const multipart = require('connect-multiparty')
 
@@ -115,13 +114,3 @@ app.post("/sendmail", multipartMiddleware, function (req, res) {
         }
     })
 })
-
-/** Rendering HTML **/
-const router = express.Router();
-
-router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'))
-})
-
-  //Resndering HTML pages
-  app.use('/', router)
