@@ -11,7 +11,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "aws-sdk": "^2.521.0",
+    "aws-sdk": "^2.814.0",
     "babel-preset-env": "^1.7.0",
     "bluebird": "^3.5.5",
     "cloudinary": "^1.14.0",
